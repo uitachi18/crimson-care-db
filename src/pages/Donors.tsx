@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import Navbar from "@/components/Navbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -82,9 +81,7 @@ const Donors = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <main className="container mx-auto px-4 py-8">
+    <main className="flex-1 p-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">Donor Management</h1>
           <p className="text-muted-foreground">Complete donor database with history and eligibility tracking</p>
@@ -165,8 +162,7 @@ const Donors = () => {
             )}
           </CardContent>
         </Card>
-      </main>
-    </div>
+    </main>
   );
 };
 

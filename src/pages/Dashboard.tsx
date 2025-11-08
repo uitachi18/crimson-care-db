@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import Navbar from "@/components/Navbar";
 import StatsCard from "@/components/StatsCard";
 import BloodTypeCard from "@/components/BloodTypeCard";
 import { Package, Users, FileText, AlertCircle } from "lucide-react";
@@ -96,9 +95,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <main className="container mx-auto px-4 py-8">
+    <main className="flex-1 p-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
           <p className="text-muted-foreground">Real-time blood inventory and operations overview</p>
@@ -159,8 +156,7 @@ const Dashboard = () => {
             )}
           </CardContent>
         </Card>
-      </main>
-    </div>
+    </main>
   );
 };
 

@@ -14,6 +14,47 @@ export type Database = {
   }
   public: {
     Tables: {
+      appointments: {
+        Row: {
+          appointment_date: string
+          appointment_type: string
+          created_at: string
+          donor_id: string | null
+          id: string
+          notes: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          appointment_date: string
+          appointment_type?: string
+          created_at?: string
+          donor_id?: string | null
+          id?: string
+          notes?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          appointment_date?: string
+          appointment_type?: string
+          created_at?: string
+          donor_id?: string | null
+          id?: string
+          notes?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_donor_id_fkey"
+            columns: ["donor_id"]
+            isOneToOne: false
+            referencedRelation: "donors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       blood_inventory: {
         Row: {
           blood_type: Database["public"]["Enums"]["blood_type"]
@@ -139,6 +180,51 @@ export type Database = {
           medical_notes?: string | null
           phone?: string
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      patients: {
+        Row: {
+          address: string | null
+          blood_type: Database["public"]["Enums"]["blood_type"]
+          created_at: string
+          date_of_birth: string
+          email: string | null
+          full_name: string
+          id: string
+          medical_notes: string | null
+          patient_id: string
+          phone: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          blood_type: Database["public"]["Enums"]["blood_type"]
+          created_at?: string
+          date_of_birth: string
+          email?: string | null
+          full_name: string
+          id?: string
+          medical_notes?: string | null
+          patient_id: string
+          phone: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          blood_type?: Database["public"]["Enums"]["blood_type"]
+          created_at?: string
+          date_of_birth?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          medical_notes?: string | null
+          patient_id?: string
+          phone?: string
+          status?: string
+          updated_at?: string
         }
         Relationships: []
       }
