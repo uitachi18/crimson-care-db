@@ -7,8 +7,9 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calendar as CalendarIcon, Search, Plus, CalendarCheck } from "lucide-react";
+import { Calendar as CalendarIcon, Search, CalendarCheck } from "lucide-react";
 import { format } from "date-fns";
+import { AppointmentDialog } from "@/components/AppointmentDialog";
 
 interface Appointment {
   id: string;
@@ -137,10 +138,7 @@ const Appointments = () => {
                   <SelectItem value="no-show">No Show</SelectItem>
                 </SelectContent>
               </Select>
-              <Button className="bg-primary hover:bg-primary/90">
-                <Plus className="w-4 h-4 mr-2" />
-                Schedule Appointment
-              </Button>
+              <AppointmentDialog onAppointmentCreated={fetchAppointments} />
             </div>
           </div>
         </CardHeader>
