@@ -1,11 +1,14 @@
-import { NavLink } from "react-router-dom";
-import { LayoutDashboard, Users, Droplet, FileText, UserRound, Calendar, Heart } from "lucide-react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { LayoutDashboard, Users, Droplet, FileText, UserRound, Calendar, Heart, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
@@ -15,6 +18,26 @@ const Sidebar = () => {
       }
     });
   }, []);
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Failed to sign out",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    toast({
+      title: "Signed out",
+      description: "You have been successfully signed out",
+    });
+    
+    navigate("/auth");
+  };
 
   const menuItems = [
     { to: "/", icon: LayoutDashboard, label: "Dashboard" },
@@ -67,18 +90,26 @@ const Sidebar = () => {
       </nav>
 
       {/* User Profile */}
-      <div className="p-4 border-t border-primary-foreground/10">
+      <div className="p-4 border-t border-primary-foreground/10 space-y-3">
         <div className="flex items-center space-x-3">
           <Avatar className="w-10 h-10">
             <AvatarFallback className="bg-primary-foreground text-primary font-semibold">
-              BB
+              {userEmail.substring(0, 2).toUpperCase() || "BB"}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold truncate">Blood Bank Admin</p>
+            <p className="text-sm font-semibold truncate">{userEmail || "Blood Bank Admin"}</p>
             <p className="text-xs opacity-70 truncate">System Administrator</p>
           </div>
         </div>
+        <Button
+          onClick={handleLogout}
+          variant="outline"
+          className="w-full bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+        >
+          <LogOut className="w-4 h-4 mr-2" />
+          Sign Out
+        </Button>
       </div>
     </aside>
   );
