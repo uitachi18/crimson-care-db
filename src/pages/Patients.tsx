@@ -6,7 +6,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { UserRound, Search, Phone, Mail, Plus } from "lucide-react";
+import { UserRound, Search, Phone, Mail } from "lucide-react";
+import { PatientDialog } from "@/components/PatientDialog";
 
 interface Patient {
   id: string;
@@ -102,10 +103,7 @@ const Patients = () => {
                   className="pl-10"
                 />
               </div>
-              <Button className="bg-primary hover:bg-primary/90">
-                <Plus className="w-4 h-4 mr-2" />
-                Add Patient
-              </Button>
+              <PatientDialog onPatientCreated={fetchPatients} />
             </div>
           </div>
         </CardHeader>
