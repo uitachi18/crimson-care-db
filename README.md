@@ -14,7 +14,7 @@ These tools provide a fast, efficient, and scalable development workflow.
 
 ---
 
-## 3. Editing the Project
+## 2. Editing the Project
 
 There are multiple ways to modify and work with the codebase.
 
